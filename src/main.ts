@@ -41,9 +41,11 @@ class App {
       return;
     }
 
+    const swUrl = `${import.meta.env.BASE_URL}sw.js`;
+
     try {
-      const registration = await navigator.serviceWorker.register("/sw.js", {
-        scope: "./",
+      const registration = await navigator.serviceWorker.register(swUrl, {
+        scope: import.meta.env.BASE_URL,
       });
 
       registration.addEventListener("updatefound", () => {

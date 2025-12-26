@@ -2,11 +2,11 @@
  * Main entry point - Application initialization and orchestration
  */
 
-import { uiController } from './ui-controller';
-import { audioConverter } from './converter';
-import { shareHandler } from './share-handler';
-import { validateFile, getFileInfo, isServiceWorkerSupported } from './utils';
-import { ConversionResult } from './types';
+import { uiController } from "./ui-controller";
+import { audioConverter } from "./converter";
+import { shareHandler } from "./share-handler";
+import { validateFile, getFileInfo, isServiceWorkerSupported } from "./utils";
+import { ConversionResult } from "./types";
 
 class App {
   private currentFile: File | null = null;
@@ -37,29 +37,32 @@ class App {
 
   private async registerServiceWorker(): Promise<void> {
     if (!isServiceWorkerSupported()) {
-      console.warn('Service Worker not supported');
+      console.warn("Service Worker not supported");
       return;
     }
 
     try {
-      const registration = await navigator.serviceWorker.register('/sw.js', {
-        scope: '/',
+      const registration = await navigator.serviceWorker.register("/sw.js", {
+        scope: "./",
       });
 
-      registration.addEventListener('updatefound', () => {
+      registration.addEventListener("updatefound", () => {
         const newWorker = registration.installing;
         if (newWorker) {
-          newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              console.log('New version available');
+          newWorker.addEventListener("statechange", () => {
+            if (
+              newWorker.state === "installed" &&
+              navigator.serviceWorker.controller
+            ) {
+              console.log("New version available");
             }
           });
         }
       });
 
-      console.log('Service Worker registered');
+      console.log("Service Worker registered");
     } catch (error) {
-      console.error('Service Worker registration failed:', error);
+      console.error("Service Worker registration failed:", error);
     }
   }
 
@@ -81,7 +84,7 @@ class App {
     const validation = validateFile(file);
 
     if (!validation.valid) {
-      uiController.showError(validation.error || 'Arquivo inválido');
+      uiController.showError(validation.error || "Arquivo inválido");
       return;
     }
 
@@ -92,7 +95,7 @@ class App {
 
   private async startConversion(): Promise<void> {
     if (!this.currentFile) {
-      uiController.showError('Nenhum arquivo selecionado');
+      uiController.showError("Nenhum arquivo selecionado");
       return;
     }
 
@@ -107,14 +110,14 @@ class App {
       } else {
         uiController.showError(
           this.conversionResult.error ||
-            'Ocorreu um erro durante a conversão. Por favor, tente novamente.'
+            "Ocorreu um erro durante a conversão. Por favor, tente novamente."
         );
       }
     } catch (error) {
       const message =
         error instanceof Error
           ? error.message
-          : 'Ocorreu um erro durante a conversão. Por favor, tente novamente.';
+          : "Ocorreu um erro durante a conversão. Por favor, tente novamente.";
       uiController.showError(message);
     }
   }
@@ -165,7 +168,7 @@ class App {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   const app = new App();
   app.init().catch(console.error);
 });

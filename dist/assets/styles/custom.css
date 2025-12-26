@@ -1,0 +1,133 @@
+/* Custom styles for Opus to MP3 PWA */
+
+:root {
+  --drop-zone-bg: #f8f9fa;
+  --drop-zone-border: #dee2e6;
+  --drop-zone-hover-bg: #e9ecef;
+  --drop-zone-hover-border: #0d6efd;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Drop zone styles */
+.drop-zone {
+  background-color: var(--drop-zone-bg);
+  border-color: var(--drop-zone-border) !important;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.drop-zone:hover,
+.drop-zone:focus {
+  background-color: var(--drop-zone-hover-bg);
+  border-color: var(--drop-zone-hover-border) !important;
+  outline: none;
+}
+
+.drop-zone.drag-over {
+  background-color: rgba(13, 110, 253, 0.1);
+  border-color: var(--drop-zone-hover-border) !important;
+  transform: scale(1.02);
+}
+
+.border-dashed {
+  border-style: dashed !important;
+}
+
+/* Spinning animation for gear icon */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  animation: spin 2s linear infinite;
+}
+
+/* Progress bar text visibility */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card responsive adjustments */
+@media (max-width: 576px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .card-body {
+    padding: 1.25rem !important;
+  }
+
+  .drop-zone {
+    padding: 2rem !important;
+  }
+
+  .drop-zone .display-1 {
+    font-size: 3rem !important;
+  }
+}
+
+/* Focus states for accessibility */
+.btn:focus-visible,
+.drop-zone:focus-visible {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+/* Ensure text truncation works */
+.text-truncate {
+  max-width: 100%;
+}
+
+/* Smooth transitions */
+.card {
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.btn {
+  transition: all 0.15s ease-in-out;
+}
+
+/* Status icon circles */
+.bg-success.bg-opacity-10,
+.bg-danger.bg-opacity-10 {
+  width: 100px;
+  height: 100px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* File info icon container */
+.bg-primary.bg-opacity-10 {
+  min-width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

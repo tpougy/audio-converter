@@ -41,7 +41,10 @@
       ]
     }
   },
-  "categories": ["utilities", "productivity"],
+  "categories": [
+    "utilities",
+    "productivity"
+  ],
   "lang": "pt-BR",
   "dir": "ltr"
 }
